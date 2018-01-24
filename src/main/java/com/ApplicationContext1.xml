@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--IOC入门
+        把Service类配置,管理实体类,使用bean标签
+        id:给对象在容易中提供一个唯一标识,用于获取对象
+        class:要管理类的全路径
+        scope:管理对象的作用范围
+        prototype:多例的
+        request:WEB项目中,Spring创建一个Bean的对象,将对象存入到request域中
+        session:WEB项目中,Spring创建一个Bean的对象,将对象存入到session域中
+        globalsession:WEB项目中,应用在Portle环境,如果没有Portlet环境,那么globalsession相当于session
+        initial-method:指定类中的初始化方法名称
+        destroy-method:指定类中销毁方法名称
+        -->
+    <!--
+        <bean id="us" class="cn.itcast.demo1.UserServiceImpl" scope="prototype" init-method="init"/>
+	    <bean id="ud" class="cn.itcast.demo1.UserDaoImpl2"/>-->
+
+    <!--Bean对象的三种实例化方式
+        1.使用无参构造函数(默认)
+        <bean id="us" class="cn.itcast.demo1.UserServiceImpl" scope="prototype" init-method="init"/>
+	    2.Spring管理静态工厂,使用静态工厂的方法创建对象
+        public class StaticFactory {
+            public static UserDao createDao(){
+                return new UserDaoImpl();
+            }
+        }
+        <bean scope="singleton" class="demo3.StaticFactory" id="staticFactory" factory-method="createDao"/>
+        3.Spring管理实例工厂,使用实力工厂的方法创建对象
+        public class NoStaticFactory {
+            public UserDao createDao() {
+                return new UserDaoImpl();
+            }
+        }
+        <bean id="noStaticFactory" class="demo3.NoStaticFactory"/>
+        <bean id="ud" factory-bean="noStaticFactory" factory-method="createDao"/>-->
+
+    <!--依赖注入
+        1.属性set方法方式-->
+    <bean id="cd" class="com.Dao.UserDaoImp"/>
+    <bean id="cs" class="com.Service.UserServiceImp">
+        <property name="userDaoImp" ref="cd"/>
+        <property name="msg" value="美美"/>
+    </bean>
+</beans>
