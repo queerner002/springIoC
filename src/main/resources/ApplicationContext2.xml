@@ -42,9 +42,9 @@
 
     <!--依赖注入
         1.属性set方法方式-->
-    <bean id="cd" class="com.Dao.UserDaoImp"/>
-    <bean id="cs" class="com.Service.UserServiceImp">
-        <property name="userDaoImp" ref="cd"/>
-        <property name="msg" value="美美"/>
+    <!--2.属性的构造方法的方式-->
+    <bean id="car1" class="com.Model.Car1">
+        <constructor-arg name="name" value="BMW"/>
+        <constructor-arg name="money" value="1000000"/>
     </bean>
 </beans>
